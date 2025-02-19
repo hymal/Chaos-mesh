@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Function to run a command and wait for user input
+run_command() {
+    echo "Running: $1"
+    eval $1
+    echo
+    read -p "Press Enter to continue..."
+}
+
+# List of commands to run
+commands=(
+    "kubectl top pod -n bank-of-anthos"
+    "kubectl apply -f stress.yaml"
+    "kubectl top pod -n bank-of-anthos"
+    "kubectl top pod -n bank-of-anthos"
+    "kubectl delete -f stress.yaml"
+)
+
+# Run each command
+for command in "${commands[@]}"
+do
+    run_command "$command"
+done
+
+echo "All commands executed."
+

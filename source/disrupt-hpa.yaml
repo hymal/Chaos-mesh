@@ -1,0 +1,33 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: PodChaos
+metadata:
+  name: hpa-pod-kill
+    # namespace: chaos-testing
+spec:
+  action: pod-kill
+  mode: all
+  selector:
+    namespaces:
+      - bank-of-anthos
+    labelSelectors:
+      app: transactionhistory
+        # duration: '300s'
+---
+apiVersion: chaos-mesh.org/v1alpha1
+kind: StressChaos
+metadata:
+  name: hpa-stress
+    # namespace: chaos-testing
+spec:
+  mode: one
+  selector:
+    namespaces:
+      - bank-of-anthos
+    labelSelectors:
+      app: transactionhistory
+  stressors:
+    cpu:
+      workers: 4
+      load: 90
+        # duration: '300s'
+

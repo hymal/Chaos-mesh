@@ -1,0 +1,24 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: postgres-exec-job
+  namespace: ps
+spec:
+  template:
+    spec:
+      serviceAccountName: default  # Ensure this uses the default service account
+      restartPolicy: Never
+      containers:
+      - name: kubectl-runner
+        image: bitnami/kubectl:latest
+        command:
+          - /bin/sh
+          - "-c"
+          - |
+            POD_NAME=$(kubectl get pod -n ps -l app=postgres -o jsonpath="{.items[0].metadata.name}")
+            kubectl exec $POD_NAME -n ps -- /bin/sh -c "
+              echo 'Extracting sensitive data...';
+              PGPASSWORD='root' psql -U postgres -d postgres -c \"COPY transactions TO '/tmp/transactions.csv' CSV HEADER;\";
+              echo 'Data saved to /tmp/transactions.csv';
+            "
+

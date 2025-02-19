@@ -1,0 +1,39 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: Workflow
+metadata:
+  name: try-workflow-parallel
+spec:
+  entry: kalyani
+  templates:
+    - name: kalyani
+      templateType: Parallel
+      deadline: 300s
+      children:
+        - workflow-stress-chaos
+        - workflow-pod-chaos-schedule
+    - name: workflow-pod-chaos-schedule
+      templateType: Schedule
+      deadline: 420s
+      schedule:
+        schedule: '@every 30s'
+        concurrencyPolicy: Forbid
+        type: 'PodChaos'
+        podChaos:
+          action: pod-kill
+          mode: all
+          selector:
+            labelSelectors:
+              'app': 'transactionhistory'
+    - name: workflow-stress-chaos
+      templateType: StressChaos
+      deadline: 420s
+      stressChaos:
+        mode: all
+        selector:
+          labelSelectors:
+            'app': 'transactionhistory'
+        stressors:
+          cpu:
+            workers: 4
+            load: 90
+              #  options: ['--cpu 1', '--timeout 600']

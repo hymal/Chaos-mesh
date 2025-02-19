@@ -1,0 +1,19 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: StressChaos
+metadata:
+  name: memory-stress
+  namespace: bank-of-anthos
+spec:
+  mode: one
+  selector:
+    namespaces:
+      - bank-of-anthos
+    labelSelectors:
+      app: ledgerwriter
+  stressors:
+    memory:
+      workers: 2             # Number of memory workers
+        # options: ["--vm-bytes", "95%", "--vm-keep"]
+      size: "100%"            # Amount of memory to allocate (1GiB in this case)
+  duration: "300s"           # Duration of the stress, here 5 minutes
+

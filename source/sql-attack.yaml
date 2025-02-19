@@ -1,0 +1,23 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: PodChaos
+metadata:
+  name: sql-injection-simulation
+  namespace: chaos-mesh  # Your namespace
+spec:
+  action: container-kill
+  mode: one
+  selector:
+    namespaces:
+      - bank-of-anthos  # Your namespace
+    labelSelectors:
+      app: ledger-db
+  duration: "300s"
+  scheduler:
+    cron: "@every 1m"
+  containerId: containerd://f6534293d568caeb14c6a835b6b6be1946f5917ecbf3c05046cf978bae63e0d6
+  command:
+    - /bin/bash
+    - -c
+    - |
+      ./sql_injection_simulation.sh
+

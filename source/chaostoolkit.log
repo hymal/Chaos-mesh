@@ -1,0 +1,36 @@
+[36m[2024-12-02 06:10:34 DEBUG] [__init__:101][39m ###############################################################################
+[36m[2024-12-02 06:10:34 DEBUG] [__init__:102][39m Running command 'run'
+[36m[2024-12-02 06:10:34 DEBUG] [__init__:106][39m Using settings file '/root/.chaostoolkit/settings.yaml'
+[36m[2024-12-02 06:10:34 DEBUG] [settings:31][39m The Chaos Toolkit settings file could not be found at '/root/.chaostoolkit/settings.yaml'.
+[36m[2024-12-02 06:10:34 DEBUG] [__init__:472][39m No controls to apply on 'loader'
+[36m[2024-12-02 06:10:34 DEBUG] [__init__:472][39m No controls to apply on 'loader'
+[36m[2024-12-02 06:10:34 DEBUG] [caching:24][39m Building activity cache...
+[36m[2024-12-02 06:10:34 DEBUG] [caching:35][39m Cached 0 activities
+[32m[2024-12-02 06:10:34 INFO] [experiment:59][39m Validating the experiment's syntax
+[36m[2024-12-02 06:10:34 DEBUG] [caching:42][39m Clearing activities cache
+[31m[2024-12-02 06:10:34 ERROR] [run:188][39m experiment requires a title
+[36m[2024-12-02 06:10:34 DEBUG] [run:189][39m experiment requires a title
+[36m[2024-12-10 09:12:05 DEBUG] [__init__:101][39m ###############################################################################
+[36m[2024-12-10 09:12:05 DEBUG] [__init__:102][39m Running command 'run'
+[36m[2024-12-10 09:12:05 DEBUG] [__init__:106][39m Using settings file '/root/.chaostoolkit/settings.yaml'
+[36m[2024-12-10 09:12:05 DEBUG] [settings:31][39m The Chaos Toolkit settings file could not be found at '/root/.chaostoolkit/settings.yaml'.
+[36m[2024-12-10 09:12:05 DEBUG] [__init__:472][39m No controls to apply on 'loader'
+[36m[2024-12-10 09:12:05 DEBUG] [__init__:472][39m No controls to apply on 'loader'
+[36m[2024-12-10 09:12:05 DEBUG] [caching:24][39m Building activity cache...
+[36m[2024-12-10 09:12:05 DEBUG] [caching:35][39m Cached 0 activities
+[32m[2024-12-10 09:12:05 INFO] [experiment:59][39m Validating the experiment's syntax
+[36m[2024-12-10 09:12:05 DEBUG] [caching:42][39m Clearing activities cache
+[31m[2024-12-10 09:12:05 ERROR] [run:188][39m experiment requires a title
+[36m[2024-12-10 09:12:05 DEBUG] [run:189][39m experiment requires a title
+[36m[2024-12-17 10:27:44 DEBUG] [__init__:101][39m ###############################################################################
+[36m[2024-12-17 10:27:44 DEBUG] [__init__:102][39m Running command 'run'
+[36m[2024-12-17 10:27:44 DEBUG] [__init__:106][39m Using settings file '/root/.chaostoolkit/settings.yaml'
+[36m[2024-12-17 10:27:44 DEBUG] [settings:31][39m The Chaos Toolkit settings file could not be found at '/root/.chaostoolkit/settings.yaml'.
+[36m[2024-12-17 10:27:44 DEBUG] [__init__:472][39m No controls to apply on 'loader'
+[36m[2024-12-17 10:27:44 DEBUG] [__init__:472][39m No controls to apply on 'loader'
+[36m[2024-12-17 10:27:44 DEBUG] [caching:24][39m Building activity cache...
+[36m[2024-12-17 10:27:44 DEBUG] [caching:35][39m Cached 0 activities
+[32m[2024-12-17 10:27:44 INFO] [experiment:59][39m Validating the experiment's syntax
+[36m[2024-12-17 10:27:44 DEBUG] [caching:42][39m Clearing activities cache
+[31m[2024-12-17 10:27:44 ERROR] [run:188][39m experiment requires a title
+[36m[2024-12-17 10:27:44 DEBUG] [run:189][39m experiment requires a title

@@ -1,0 +1,15 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: PodChaos
+metadata:
+  name: pod-restart
+spec:
+  action: pod-kill
+  mode: fixed
+  value: "3"
+  selector:
+    namespaces:
+      - bank-of-anthos
+    labelSelectors:
+      app: ledgerwriter
+  duration: "60s"  # The pod will be restarted and kept down for 60 seconds
+

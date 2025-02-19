@@ -1,0 +1,22 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: StressChaos
+metadata:
+  name: cpu-memory-stress
+  namespace: bank-of-anthos
+spec:
+  mode: one
+  selector:
+    namespaces:
+      - bank-of-anthos
+    labelSelectors:
+      app: ledgerwriter
+  stressors:
+    memory:
+      workers: 4
+      size: "100%"
+        # options: ["--vm-bytes", "100%", "--vm-keep"]  # Allocate 80% of the available memory
+    cpu:
+      workers: 4       # Number of CPU workers
+      load: 100        # 100% CPU load for each worker
+  duration: "300s"     # Duration of the stress, here 5 minutes
+

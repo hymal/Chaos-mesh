@@ -1,0 +1,22 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: NetworkChaos
+metadata:
+  name: network-partition
+  namespace: chaos-testing
+spec:
+  action: partition
+  mode: all
+  selector:
+    namespaces:
+      - default
+    labelSelectors:
+      app: <service-name>  # Replace with the label of your service
+  direction: to
+  target:
+    mode: all
+    selector:
+      namespaces:
+        - default
+      labelSelectors:
+        app: <dependency-name>  # Replace with the label of the dependency
+

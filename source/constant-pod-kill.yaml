@@ -1,0 +1,18 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: Schedule
+metadata:
+  name: delete-pod-every-30s
+    # namespace: chaos-testing
+spec:
+  schedule: "*/30 * * * * *"
+  type: PodChaos
+  podChaos:
+    action: pod-kill
+    mode: all
+    selector:
+      namespaces:
+        - bank-of-anthos
+      labelSelectors:
+        app: transactionhistory
+    duration: '30s'
+

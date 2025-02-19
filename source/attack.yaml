@@ -1,0 +1,22 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: NetworkChaos
+metadata:
+  name: network-partition-2
+  namespace: bank-of-anthos
+spec:
+  action: partition
+  mode: all
+  selector:
+    namespaces:
+      - bank-of-anthos
+    labelSelectors:
+      app: ledgerwriter  # Replace with the label of your service
+  direction: to
+  target:
+    mode: all
+    selector:
+      namespaces:
+        - bank-of-anthos
+      labelSelectors:
+        app: frontend  # Replace with the label of the dependency
+

@@ -1,0 +1,54 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: Workflow
+metadata:
+  name: combined-workflow
+    # namespace: chaos-testing
+spec:
+  entry: sequential
+  templates:
+    - name: sequential
+      templateType: Sequence
+      children:
+        - hpa-stress
+        - delete-pod-every-30s
+    - name: hpa-stress
+      templateType: Task
+      task:
+        apiVersion: chaos-mesh.org/v1alpha1
+        kind: StressChaos
+        metadata:
+          name: hpa-stress
+            # namespace: chaos-testing
+        spec:
+          mode: all
+          selector:
+            namespaces:
+              - bank-of-anthos
+            labelSelectors:
+              app: transactionhistory
+          stressors:
+            cpu:
+              workers: 4
+              load: 90
+          duration: '420s'
+    - name: delete-pod-every-30s
+      templateType: Schedule
+      schedule:
+        cron: "*/30 * * * *"
+        type: PodChaos
+        task:
+          apiVersion: chaos-mesh.org/v1alpha1
+          kind: PodChaos
+          metadata:
+            name: delete-pod-every-30s
+              #  namespace: chaos-testing
+          spec:
+            action: pod-kill
+            mode: all
+            selector:
+              namespaces:
+                - bank-of-anthos
+              labelSelectors:
+                app: transactionhistory
+            duration: '30s'
+

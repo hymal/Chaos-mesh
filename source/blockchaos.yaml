@@ -1,0 +1,18 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: BlockChaos
+metadata:
+  name: block-freeze
+  namespace: bank-of-anthos
+spec:
+  action: "io-fault"
+  mode: "all"
+  selector:
+    namespaces:
+      - bank-of-anthos  # Replace with your target namespace
+    labelSelectors:
+      app: ledger-db  # Replace with your database application's label
+  path: "/dev/sda"  # Replace with the specific block device path
+  containerName: <database-container-name>  # Replace with the container name if needed
+  volumeMountPath: "/var/lib/mysql"  # Replace with the specific volume mount path
+  duration: "300s"  # Duration to apply the block freeze, e.g., 300 seconds (5 minutes)
+

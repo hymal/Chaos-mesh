@@ -1,0 +1,22 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: NetworkChaos
+metadata:
+  name: network-partition
+spec:
+  action: partition
+  mode: all
+  selector:
+    namespaces:
+      - bank-of-anthos
+    labelSelectors:
+      "app": "ledgerwriter"
+  direction: to
+  target:
+    selector:
+      namespaces:
+        - bank-of-anthos
+      labelSelectors:
+        "app": "ledger-db"
+    mode: all
+  duration: "300s" # network latency persists for 100 seconds
+

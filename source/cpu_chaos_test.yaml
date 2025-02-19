@@ -1,0 +1,20 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: StressChaos
+metadata:
+  name: stress-chaos
+  namespace: new
+spec:
+  mode: one                   # Target one pod. Change to `all` to target all matching pods.
+  selector:
+    namespaces:
+      - new                   # Target namespace
+    labelSelectors:
+      app: transactionhistory # Label to match the pod
+  stressors:
+    cpu:
+      workers: 1              # Number of CPU cores to stress
+      load: 100               # Stress CPU to 100% load
+    memory:
+      workers: 1              # Number of memory workers
+      size: "100%"            # Stress memory to 100% of allocated resources
+  duration: "5m"              # Duration of the stress test

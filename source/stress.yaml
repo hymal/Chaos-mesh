@@ -1,0 +1,18 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: StressChaos
+metadata:
+  name: cpu-stress
+  namespace: bank-of-anthos
+spec:
+  mode: all
+  selector:
+    namespaces:
+      - bank-of-anthos
+    labelSelectors:
+      app: transactionhistory
+  stressors:
+    cpu:
+      workers: 4      # Number of CPU workers
+      load: 80        # Percentage of CPU load for each worker
+        #  duration: "300s"    # Duration of the stress, here 5 minutes
+

@@ -1,0 +1,86 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: Workflow
+metadata:
+  name: gradual-app-kill
+  namespace: bank-of-anthos  # Ensure this matches your namespace
+spec:
+  entry: network-latency-sequence
+  templates:
+    - name: network-latency-sequence
+      templateType: Serial  # Defines sequential execution
+      children:
+        - block-25ms-latency
+        - block-50ms-latency
+        - block-75ms-latency
+        - block-100ms-latency
+        - pod-restart-task  # Added the new pod restart task here
+ 
+    - name: block-25ms-latency
+      templateType: NetworkChaos
+      networkChaos:
+        action: delay
+        mode: all
+        selector:
+          labelSelectors:
+            app: ledgerwriter  # Ensure the label matches your app's pods
+        delay:
+          latency: "1200ms"
+          correlation: "25"
+          jitter: "0ms"
+      deadline: "1m"  # Replacing duration with deadline
+ 
+    - name: block-50ms-latency
+      templateType: NetworkChaos
+      networkChaos:
+        action: delay
+        mode: all
+        selector:
+          labelSelectors:
+            app: ledgerwriter
+        delay:
+          latency: "1500ms"
+          correlation: "50"
+          jitter: "0ms"
+      deadline: "1m"  # Replacing duration with deadline
+ 
+    - name: block-75ms-latency
+      templateType: NetworkChaos
+      networkChaos:
+        action: delay
+        mode: all
+        selector:
+          labelSelectors:
+            app: ledgerwriter
+        delay:
+          latency: "20000ms"
+          correlation: "75"
+          jitter: "0ms"
+      deadline: "1m"  # Replacing duration with deadline
+ 
+    - name: block-100ms-latency
+      templateType: NetworkChaos
+      networkChaos:
+        action: delay
+        mode: all
+        selector:
+          labelSelectors:
+            app: ledgerwriter
+        delay:
+          latency: "2500ms"
+          correlation: "100"
+          jitter: "0ms"
+      deadline: "1m"  # Replacing duration with deadline
+ 
+    - name: pod-restart-task  # New task for pod restart
+      templateType: PodChaos
+      podChaos:
+        action: pod-kill
+        mode: all
+          # value: "1"
+        selector:
+          namespaces:
+            - bank-of-anthos
+          labelSelectors:
+            app: ledgerwriter
+      deadline: "60s"  # Use deadline instead of duration to specify the chaos duration
+ 

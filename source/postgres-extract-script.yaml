@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-extract-script
+  namespace: ps
+data:
+  extract.sh: |
+    #!/bin/sh
+    echo 'Extracting sensitive data...'
+    PGPASSWORD='root' psql -U postgres -d postgres -c "COPY transactions TO '/tmp/transactions.csv' CSV HEADER;"
+    echo 'Data saved to /tmp/transactions.csv'
+

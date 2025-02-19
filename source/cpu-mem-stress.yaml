@@ -1,0 +1,20 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: StressChaos
+metadata:
+  name: resource-stress
+  namespace: bank-of-anthos
+spec:
+  mode: one
+  selector:
+    namespaces:
+      - ps 
+    labelSelectors:
+      app: my-app # Replace with your app's label
+  stressors:
+    cpu:
+      workers: 4
+      load: 100
+        #  memory:
+        #size: "500"
+        #vm: 8    
+

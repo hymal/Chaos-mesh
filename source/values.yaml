@@ -1,0 +1,61 @@
+elasticsearch:
+  image: "docker.elastic.co/elasticsearch/elasticsearch:7.10.1"
+  replicas: 3
+  minimumMasterNodes: 2
+  readinessProbe:
+    httpGet:
+      path: /_cluster/health?local=true
+      port: 9200
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    timeoutSeconds: 5
+  # Security settings
+  xpack.security.enabled: true
+  xpack.security.authc:
+    realms:
+      native:
+        native1:
+          order: 0
+  xpack.security.transport.ssl.enabled: true
+  xpack.security.transport.ssl.verification_mode: certificate
+  xpack.security.transport.ssl.key: /usr/share/elasticsearch/config/certs/tls.key
+  xpack.security.transport.ssl.certificate: /usr/share/elasticsearch/config/certs/tls.crt
+  xpack.security.transport.ssl.certificate_authorities: ["/usr/share/elasticsearch/config/certs/ca.crt"]
+  xpack.security.http.ssl.enabled: true
+  xpack.security.http.ssl.key: /path/to/your/key.key
+  xpack.security.http.ssl.certificate: /path/to/your/cert.crt
+  xpack.security.http.ssl.certificate_authorities: ["/path/to/your/ca.crt"]
+  nodeSelector:
+    role: data
+  resources:
+    requests:
+      cpu: "1000m"
+      memory: "2Gi"
+    limits:
+      cpu: "2000m"
+      memory: "4Gi"
+  volumeClaimTemplate:
+    accessModes: [ "ReadWriteOnce" ]
+    resources:
+      requests:
+        storage: 10Gi
+  extraEnvs:
+    - name: ES_JAVA_OPTS
+      value: "-Xms1g -Xmx1g"
+    - name: ELASTIC_PASSWORD
+      value: "demouser"
+
+# Storage class for persistent volumes
+storageClass: standard
+
+# Service configuration
+service:
+  type: LoadBalancer
+  ports:
+    - port: 9200
+      targetPort: 9200
+      name: http
+    - port: 9300
+      targetPort: 9300
+      name: transport
+

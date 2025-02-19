@@ -1,0 +1,22 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: ChaosExperiment
+metadata:
+  name: cpu-stress
+spec:
+  selector:
+    labelSelector:
+      matchLabels:
+        app: transactionhistory  # Replace with your app label
+  actions:
+    - type: stress-ng
+      duration: "10m"
+      mode: all
+      stressors:
+        - cpu:
+            count: 8
+  strategy:
+    steady-state-duration: 0s
+    chaos-duration: 10m
+    fault-injection-rate: 1
+    number: 1
+    interval: 10m

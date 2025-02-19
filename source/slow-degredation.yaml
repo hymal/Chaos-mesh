@@ -1,0 +1,168 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: PodChaos
+metadata:
+  name: slow-app-degradation-10
+  namespace: bank-of-anthos
+spec:
+  action: pod-kill
+  mode: fixed-percent
+  value: "10"
+  selector:
+    namespaces:
+      - bank-of-anthos
+    labelSelectors:
+      app: ledgerwriter
+  duration: "1m"
+
+# podchaos_degradation_20.yml
+apiVersion: chaos-mesh.org/v1alpha1
+kind: PodChaos
+metadata:
+  name: slow-app-degradation-20
+  namespace: bank-of-anthos
+spec:
+  action: pod-kill
+  mode: fixed-percent
+  value: "20"
+  selector:
+    namespaces:
+      - bank-of-anthos
+    labelSelectors:
+      app: ledgerwriter
+  duration: "1m"
+
+# podchaos_degradation_30.yml
+apiVersion: chaos-mesh.org/v1alpha1
+kind: PodChaos
+metadata:
+  name: slow-app-degradation-30
+  namespace: bank-of-anthos
+spec:
+  action: pod-kill
+  mode: fixed-percent
+  value: "30"
+  selector:
+    namespaces:
+      - bank-of-anthos
+    labelSelectors:
+      app: ledgerwriter
+  duration: "1m"
+
+# podchaos_degradation_40.yml
+apiVersion: chaos-mesh.org/v1alpha1
+kind: PodChaos
+metadata:
+  name: slow-app-degradation-40
+  namespace: bank-of-anthos
+spec:
+  action: pod-kill
+  mode: fixed-percent
+  value: "40"
+  selector:
+    namespaces:
+      - bank-of-anthos
+    labelSelectors:
+      app: ledgerwriter
+  duration: "1m"
+
+# podchaos_degradation_50.yml
+apiVersion: chaos-mesh.org/v1alpha1
+kind: PodChaos
+metadata:
+  name: slow-app-degradation-50
+  namespace: bank-of-anthos
+spec:
+  action: pod-kill
+  mode: fixed-percent
+  value: "50"
+  selector:
+    namespaces:
+      - bank-of-anthos
+    labelSelectors:
+      app: ledgerwriter
+  duration: "1m"
+
+# podchaos_degradation_60.yml
+apiVersion: chaos-mesh.org/v1alpha1
+kind: PodChaos
+metadata:
+  name: slow-app-degradation-60
+  namespace: bank-of-anthos
+spec:
+  action: pod-kill
+  mode: fixed-percent
+  value: "60"
+  selector:
+    namespaces:
+      - bank-of-anthos
+    labelSelectors:
+      app: ledgerwriter
+  duration: "1m"
+
+# podchaos_degradation_70.yml
+apiVersion: chaos-mesh.org/v1alpha1
+kind: PodChaos
+metadata:
+  name: slow-app-degradation-70
+  namespace: bank-of-anthos
+spec:
+  action: pod-kill
+  mode: fixed-percent
+  value: "70"
+  selector:
+    namespaces:
+      - bank-of-anthos
+    labelSelectors:
+      app: ledgerwriter
+  duration: "1m"
+
+# podchaos_degradation_80.yml
+apiVersion: chaos-mesh.org/v1alpha1
+kind: PodChaos
+metadata:
+  name: slow-app-degradation-80
+  namespace: bank-of-anthos
+spec:
+  action: pod-kill
+  mode: fixed-percent
+  value: "80"
+  selector:
+    namespaces:
+      - bank-of-anthos
+    labelSelectors:
+      app: ledgerwriter
+  duration: "1m"
+
+# podchaos_degradation_90.yml
+apiVersion: chaos-mesh.org/v1alpha1
+kind: PodChaos
+metadata:
+  name: slow-app-degradation-90
+  namespace: bank-of-anthos
+spec:
+  action: pod-kill
+  mode: fixed-percent
+  value: "90"
+  selector:
+    namespaces:
+      - bank-of-anthos
+    labelSelectors:
+      app: ledgerwriter
+  duration: "1m"
+
+# podchaos_degradation_100.yml
+apiVersion: chaos-mesh.org/v1alpha1
+kind: PodChaos
+metadata:
+  name: slow-app-degradation-100
+  namespace: bank-of-anthos
+spec:
+  action: pod-kill
+  mode: fixed-percent
+  value: "100"
+  selector:
+    namespaces:
+      - bank-of-anthos
+    labelSelectors:
+      app: ledgerwriter
+  duration: "1m"

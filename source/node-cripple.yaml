@@ -1,0 +1,29 @@
+apiVersion: litmuschaos.io/v1alpha1
+kind: ChaosEngine
+metadata:
+  name: cripple-node
+  namespace: litmus
+spec:
+  appinfo: {}
+    # appns: bank-of-anthos
+    # applabel: "app=my-app" # Replace with your app's label
+    # appkind: deployment
+  chaosServiceAccount: litmus-admin
+  experiments:
+    - name: node-cpu-hog
+      spec:
+        components:
+          env:
+            # Number of CPU cores to stress. Adjust based on the node's capacity.
+            - name: CPU_CORES
+              value: "2"
+            # Duration for the chaos experiment
+            - name: TOTAL_CHAOS_DURATION
+              value: "300"
+            # Node selector to target a specific node
+            - name: NODE_LABEL
+              value: "kubernetes.io/hostname=gke-chas-monkey-cme-pool-2-5cdbc4c4-4zr4" # Replace <node-name> with your target node's hostname
+            # Optional: Whether to force the experiment
+            - name: FORCE
+              value: "true"
+

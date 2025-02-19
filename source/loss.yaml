@@ -1,0 +1,17 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: NetworkChaos
+metadata:
+  name: network-loss
+  namespace: bank-of-anthos
+spec:
+  action: loss
+  mode: all
+  selector:
+    namespaces:
+      - bank-of-anthos  # Replace with your target namespace
+    labelSelectors:
+      app: ledgerwriter  # Replace with your pod's label
+  loss:
+    loss: "100"  # Introduce 50% packet loss
+  duration: "120s"  # Duration to apply the network loss, e.g., 60 seconds
+

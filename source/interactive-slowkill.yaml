@@ -1,0 +1,18 @@
+#!/bin/bash
+
+echo "Press Enter to run: kubectl get po -n bank-of-anthos"
+read -p ""
+kubectl get po -n bank-of-anthos
+
+echo "Press Enter to run: kubectl apply -f slow-degredation.yaml"
+read -p ""
+kubectl apply -f slow-degredation.yaml
+
+echo "Press Enter to run: kubectl get po -n bank-of-anthos"
+read -p ""
+kubectl get po -n bank-of-anthos
+
+echo "Press Enter to run: kubectl delete -f slow-degredation.yaml"
+read -p ""
+kubectl delete -f slow-degredation.yaml
+

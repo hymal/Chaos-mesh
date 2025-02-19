@@ -1,0 +1,16 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: PodChaos
+metadata:
+  name: pod-chaos
+  namespace: bank-of-anthos  
+spec:
+  selector:
+    labelSelectors:
+      app: transactionhistory
+  action:
+    type: pod-failure
+  strategy:
+    steady-state-duration: 0s
+    chaos-duration: 10m
+    fault-injection-rate: 1
+    number: 1

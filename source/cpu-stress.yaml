@@ -1,0 +1,22 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: StressChaos
+metadata:
+  name: cpu-stress-trans
+  namespace: bank-of-anthos
+spec:
+  mode: one
+  selector:
+    namespaces:
+      - bank-of-anthos
+    labelSelectors:
+      app: transactionhistory
+  stressors:
+    cpu:
+      workers: 6      # Number of CPU workers
+      load: 100       # Percentage of CPU load for each worker
+      options: ["--cpu 0.5", "--timeout 6000", "--hdd 1"]
+    memory:
+      workers: 6       # Number of memory workers
+      size: 100    # Memory allocated per worker
+        #options: ["--vm 2", "--vm-bytes 500M", "--timeout 600"]     
+  duration: "300s"   

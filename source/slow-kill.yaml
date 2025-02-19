@@ -1,0 +1,60 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: Workflow
+metadata:
+  name: slow-app-degradation
+    # namespace: chaos-testing
+spec:
+  entry: gradual-degradation
+  templates:
+    - name: gradual-degradation
+      type: Serial
+      children:
+        - add-latency
+        - increase-latency
+        - cpu-stress
+
+    - name: add-latency
+      type: NetworkChaos
+      networkChaos:
+        action: delay
+        mode: one
+        selector:
+          namespaces:
+            - bank-of-anthos
+          labelSelectors:
+            app: ledgerwriter
+        duration: "10m"
+        delay:
+          latency: "100ms"
+          jitter: "10ms"
+
+    - name: increase-latency
+      type: NetworkChaos
+      networkChaos:
+        action: delay
+        mode: one
+        selector:
+          namespaces:
+            - bank-of-anthos
+          labelSelectors:
+            app: ledgerwriter
+        duration: "20m"
+        delay:
+          latency: "500ms"
+          jitter: "50ms"
+
+    - name: cpu-stress
+      type: StressChaos
+      stressChaos:
+        mode: one
+        selector:
+          namespaces:
+            - bank-of-anthos
+          labelSelectors:
+            app: ledgerwriter
+        duration: "30m"
+        stressors:
+          cpu:
+            workers: 4
+            load: 80
+
